@@ -13,6 +13,8 @@
     "moralis:events": "node addEvents.js"
   },
   "dependencies": {
+    "@apollo/client": "^3.6.9",
+    "graphql": "^16.6.0",
     "moralis": "^2.0.1",
     "next": "12.2.5",
     "react": "18.2.0",
