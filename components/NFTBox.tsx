@@ -4,7 +4,7 @@ import { useWeb3Contract, useMoralis } from "react-moralis"
 import nftMarketplaceAbi from "../constants/NftMarketplace.json"
 import nftAbi from "../constants/BasicNft.json"
 import Image from "next/image" //can't be used on static sites
-import { Card, useNotification } from "web3uikit"
+import { Card, Tooltip, Illustration, Modal, Input, Button, useNotification } from "web3uikit"
 import { ethers } from "ethers"
 import { UpdateListingModal } from "./UpdateListingModals"
 

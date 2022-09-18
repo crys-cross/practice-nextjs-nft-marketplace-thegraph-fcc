@@ -27,7 +27,7 @@ interface contractAddressesItemInterface {
 const Home: NextPage = () => {
     // TODO: Implement paging in UI
     // const [page, setPage] = useState(1)
-    const { isWeb3Enabled, chainId } = useMoralis()
+    const { chainId } = useMoralis()
     const addresses: contractAddressesInterface = networkConfig
     const marketplaceAddress = chainId
         ? addresses[parseInt(chainId!).toString()]["NftMarketplace"][0]
@@ -39,29 +39,25 @@ const Home: NextPage = () => {
         <div className="container mx-auto">
             <h1 className="py-4 px-4 font-bold text-2xl">Recently Listed</h1>
             <div className="flex flex-wrap">
-                {isWeb3Enabled ? (
-                    loading || !listedNfts ? (
-                        <div>Loading...</div>
-                    ) : (
-                        listedNfts.activeItems.map((nft: nftInterface /*, index */) => {
-                            console.log(nft)
-                            const { price, nftAddress, tokenId, seller } = nft
-                            console.log(marketplaceAddress)
-
-                            return (
-                                <NFTBox
-                                    price={price}
-                                    nftAddress={nftAddress}
-                                    tokenId={tokenId}
-                                    marketplaceAddress={marketplaceAddress!}
-                                    seller={seller}
-                                    key={`${nftAddress}${tokenId}`}
-                                />
-                            )
-                        })
-                    )
+                {loading || !listedNfts ? (
+                    <div>Loading...</div>
                 ) : (
-                    <div>Web3 Currently Not Enabled</div>
+                    listedNfts.activeItems.map((nft: nftInterface /*, index */) => {
+                        console.log(nft)
+                        const { price, nftAddress, tokenId, seller } = nft
+                        console.log(marketplaceAddress)
+
+                        return (
+                            <NFTBox
+                                price={price}
+                                nftAddress={nftAddress}
+                                tokenId={tokenId}
+                                marketplaceAddress={marketplaceAddress!}
+                                seller={seller}
+                                key={`${nftAddress}${tokenId}`}
+                            />
+                        )
+                    })
                 )}
             </div>
         </div>
