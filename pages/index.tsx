@@ -27,13 +27,13 @@ interface contractAddressesItemInterface {
 const Home: NextPage = () => {
     // TODO: Implement paging in UI
     // const [page, setPage] = useState(1)
+    const { loading, error: subgraphQueryError, data: listedNfts } = useQuery(GET_ACTIVE_ITEMS)
+    console.log(listedNfts)
     const { chainId } = useMoralis()
     const addresses: contractAddressesInterface = networkConfig
-    const marketplaceAddress = chainId
+    const nftMarketplaceAddress = chainId
         ? addresses[parseInt(chainId!).toString()]["NftMarketplace"][0]
         : null
-
-    const { loading, error: subgraphQueryError, data: listedNfts } = useQuery(GET_ACTIVE_ITEMS)
 
     return (
         <div className="container mx-auto">
@@ -45,14 +45,14 @@ const Home: NextPage = () => {
                     listedNfts.activeItems.map((nft: nftInterface /*, index */) => {
                         console.log(nft)
                         const { price, nftAddress, tokenId, seller } = nft
-                        console.log(marketplaceAddress)
+                        console.log(nftMarketplaceAddress)
 
                         return (
                             <NFTBox
                                 price={price}
                                 nftAddress={nftAddress}
                                 tokenId={tokenId}
-                                marketplaceAddress={marketplaceAddress!}
+                                nftMarketplaceAddress={nftMarketplaceAddress!}
                                 seller={seller}
                                 key={`${nftAddress}${tokenId}`}
                             />
